@@ -7,6 +7,7 @@ This is the data visualization of avocado prices by time and by region in the Un
 This app will consist of a single screen with the main data display, control buttons, and footer links. The data display will include the avocado prices. At top of the screen, a drop-down will be added to the control buttons to toggle between the different data displays (by region and by time). Finally, the footer links will include my Github, LinkedIn, and Angel List. 
 
 ## Functionality and MVPs
+* Create the visualization
 * Users will be able to interact with the data by region
 * Users will be able to interact with the data by time
 
