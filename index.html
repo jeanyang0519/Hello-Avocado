@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,215 +6,169 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hello Avocado</title>
     <link rel="icon" href="src/public/favicon.ico" />
-    <!-- <script src="./dist/main.js"></script> -->
+    <script src="./dist/main.js"></script>
     <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+</head> -->
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>Hello Avocado</title>
+    <link rel="icon" href="src/public/favicon.ico" />
 </head>
+<style>
+    /* set the CSS */
 
+    .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 2px;
+    }
 
+    .axisSteelBlue text {
+        fill: steelblue;
+    }
+
+    .axisRed text {
+        fill: red;
+    }
+
+    .legend {
+        font: 16px sans-serif;
+        font-weight: bold;
+        text-anchor: start;
+    }
+</style>
 <body>
-    <button id="start">Data 1</button>
-    <button id="reset">Data 2</button>    
-   <script>
 
-
-
-    d3.select("#start").on("click", function () {
-        d3.csv("/data/volume-data.csv").then(function (data) {
-            // debugger
-            createVisualization(data);
-            // updateData(data);
-        });
-
-
-
-
-
-            // d3.csv("/data/volume-data.csv", function (d) {
-            //     return {
-            //         Week: d.Week,
-            //         Chile: +d.Chile.split(",").join("")
-            //     };
-            // }, function (error, rows) {
-            //     data = rows;
-            //     console.log(data);
-            //     updateData();
-            // });
-        });
-
-    d3.select("#reset").on("click", function () {
-        d3.csv("/data/volume-data-new.csv").then(function (data) {
-            createVisualization(data);
-            // updateData(data);
-        });
-
-
-            // d3.csv("/data/volume-data.csv", function (d) {
-            //     return {
-            //         Week: d.Week,
-            //         Peru: +d.California.split(",").join("")
-            //     };
-            // }, function (error, rows) {
-            //     data = rows;
-            //     console.log(data);
-            //     updateData();
-            // });
-        });
-
-      
-
-        function updateData(data) {
-                var maxValue = d3.max(data, function (d) { return +d.Chile.split(",").join(""); });
-
-
-                var y_axisLength = 200;
-
-                 var w = 300;
-            var h = 350;
-
-                var svg = d3.select("body")
-                .append("svg")
-                .attr("width", w)
-                .attr("height", h);
-
-
-                // update the scale to get the new max value
-                yScale = d3.scaleLinear()
-                    .domain([0, maxValue])
-                    .range([0, y_axisLength]);
-
-                // select all the rectangles and transition to new 'y' and 'height' properties
-                svg.selectAll("rect")
-                    .data(data)
-                    .transition()
-                    .attr("y", function (d) {
-                        return h - yScale(d.Chile.split(",").join("")) - 5; // Set y coordinate of rect using the y scale
-                    })
-                    .attr("height", function (d) {
-                        console.log(d.Chile.split(",").join(""));
-                        return yScale(d.Chile.split(",").join(""));
-                    })
-
-                // recreate the mouseovers with the new data
-                svg.selectAll("rect")
-                    .on("mouseover", function (d) {
-                        return tooltip.style("visibility", "visible").text(d.city + ": " + d.Chile.split(",").join(""));
-                    })
-                    .on("mousemove", function (d) {
-                        return tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px").text(d.city + ": " + d.Chile.split(",").join(""));
-                    })
-                    .on("mouseout", function (d) {
-                        return tooltip.style("visibility", "hidden");
-                    });
-            }
-        
-
-    // d3.csv("/data/volume-data.csv").then(function (data) {
-    //         createVisualization(data);
-    //     });
-
-        // Write the createVisualization function
-        // This will contain the script that creates the chart
-        function createVisualization(data) {
-            // Width and height of SVG
-            
-            var w = 300;
-            var h = 350;
-
-            
-
-            // Get length of dataset
-            var arrayLength = data.length; // length of dataset
-            var maxValue = d3.max(data, function (d) { return +d.Chile.split(",").join(""); }); // get maximum
-            
-
-            
-            var x_axisLength = 200; // length of x-axis in our layout
-            var y_axisLength = 200; // length of y-axis in our layout
-
-            // Use a scale for the height of the visualization
-            var yScale = d3.scaleLinear()
-                .domain([0, maxValue])
-                .range([0, y_axisLength]);
-
-            //Create SVG element
-            var svg = d3.select("body")
-                .append("svg")
-                .attr("width", w)
-                .attr("height", h);
-
-            // Select and generate rectangle elements
-
-
-
-            var tooltip = d3.select("body")
-                .append("div")
-                .style("position", "absolute")
-                .style("font-family", "'Open Sans', sans-serif")
-                .style("font-size", "12px")
-                .style("z-index", "10")
-                .style("visibility", "hidden");
     
-            
-            svg.selectAll("rect")
-                .data(data)
-                .enter()
-                .append("rect")
-                .attr("x", function (d, i) {
-                    return i * (x_axisLength / arrayLength) + 60; // Set x coordinate of rectangle to index of data value (i) *25
-                })
-                .attr("y", function (d) {
-                    
-                    return h - yScale(d.Chile.split(",").join("")); // Set y coordinate of rect using the y scale
-                })
-                .attr("width", (x_axisLength / arrayLength) - 1)
-                .attr("height", function (d) {
-                    return yScale(d.Chile.split(",").join("")); // Set height of using the scale
-                })
-                .attr("fill", "steelblue")
-                .on("mouseover", function (d) {
-                    return tooltip.style("visibility", "visible").text(d.Week + ": " + d.Chile.split(",").join(""));
-                })
-                .on("mousemove", function (d) {
-                    return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px").text(d.Week + ": " + d.Chile.split(",").join(""));
-                })
-                .on("mouseout", function (d) {
-                    return tooltip.style("visibility", "hidden");
-                });
 
-            // Create y-axis
-            svg.append("line")
-                .attr("x1", 60)
-                .attr("y1", 150)
-                .attr("x2", 60)
-                .attr("y2", 350)
-                .attr("stroke-width", 4)
-                .attr("stroke", "black");
+    <!-- load the d3.js library -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
 
-            // Create x-axis
-            svg.append("line")
-                .attr("x1", 60)
-                .attr("y1", 350)
-                .attr("x2", 260)
-                .attr("y2", 350)
-                .attr("stroke-width", 4)
-                .attr("stroke", "black");
+        // set the dimensions and margins of the graph
+        var margin = { top: 20, right: 40, bottom: 60, left: 50 },
+            width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
 
-            // y-axis label
+        // parse the date / time
+        var parseTime = d3.timeParse("%d-%b-%y");
+
+        // set the ranges
+        var x = d3.scaleTime().range([0, width]);
+        var y0 = d3.scaleLinear().range([height, 0]);
+        var y1 = d3.scaleLinear().range([height, 0]);
+        var y2 = d3.scaleLinear().range([height, 0]);
+
+        // define the 1st line
+        var valueline = d3.line()
+            .x(function (d) { return x(d.date); })
+            .y(function (d) { return y0(d.close); });
+
+        // define the 2nd line
+        var valueline2 = d3.line()
+            .x(function (d) { return x(d.date); })
+            .y(function (d) { return y1(d.open); });
+
+        // define the 3rd line 
+        var valueline2 = d3.line()
+            .x(function (d) { return x(d.date); })
+            .y(function (d) { return y2(d.open); });
+
+        // append the svg obgect to the body of the page
+        // appends a 'group' element to 'svg'
+        // moves the 'group' element to the top left margin
+        var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // get the data
+        d3.csv("data4.csv", function (error, data) {
+            if (error) throw error;
+
+            // format the data
+            data.forEach(function (d) {
+                d.date = parseTime(d.date);
+                d.close = +d.close;
+                d.open = +d.open;
+            });
+
+            // scale the range of the data
+            x.domain(d3.extent(data, function (d) { return d.date; }));
+            y0.domain([0, d3.max(data, function (d) { return Math.max(d.close); })]);
+            y1.domain([0, d3.max(data, function (d) { return Math.max(d.open); })]);
+
+            // add the valueline path.
+            svg.append("path")
+                .data([data])
+                .attr("class", "line")
+                .attr("id", "blueLine")
+                .attr("d", valueline);
+
+            // add the valueline2 path.
+            svg.append("path")
+                .data([data])
+                .attr("class", "line")
+                .attr("id", "redLine")
+                .style("stroke", "red")
+                .attr("d", valueline2);
+
+            // add the X Axis
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            // add the Y0 Axis
+            svg.append("g")
+                .attr("class", "axisSteelBlue")
+                .call(d3.axisLeft(y0));
+
+            // add the Y1 Axis
+            svg.append("g")
+                .attr("class", "axisRed")
+                .attr("transform", "translate( " + width + ", 0 )")
+                .call(d3.axisRight(y1));
+
+            // add the blue line legend
             svg.append("text")
-                .attr("class", "y label")
-                .attr("text-anchor", "end")
-                .text("Total Volume")
-                .attr("transform", "translate(40, 40) rotate(-90)")
-                .attr("font-size", "14")
-                .attr("font-family", "'Open Sans', sans-serif");
+                .attr("x", 0)
+                .attr("y", height + margin.top + 15)
+                .attr("class", "legend")
+                .style("fill", "steelblue")
+                .on("click", function () {
+                    // determine if current line is visible
+                    var active = blueLine.active ? false : true,
+                        newOpacity = active ? 0 : 1;
+                    // hide or show the elements
+                    d3.select("#blueLine").style("opacity", newOpacity);
+                    // update whether or not the elements are active
+                    blueLine.active = active;
+                })
+                .text("Blue Line");
 
+            // add the red line legend
+            svg.append("text")
+                .attr("x", 0)
+                .attr("y", height + margin.top + 35)
+                .attr("class", "legend")
+                .style("fill", "red")
+                .on("click", function () {
+                    // determine if current line is visible
+                    var active = redLine.active ? false : true,
+                        newOpacity = active ? 0 : 1;
+                    // hide or show the elements
+                    d3.select("#redLine").style("opacity", newOpacity);
+                    // update whether or not the elements are active
+                    redLine.active = active;
+                })
+                .text("Red Line");
 
-                
-        };
-        
+        });
 
-
-        
-            </script>
+    </script>
 </body>
 </html>
