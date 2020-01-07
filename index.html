@@ -6,100 +6,125 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hello Avocado</title>
     <link rel="icon" href="src/public/favicon.ico" />
+    <!-- <script src="./dist/main.js"></script> -->
     <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
 </head>
+
+
 <body>
-    <div>Hello Avocado</div>
-    <script>
+   <script>
+
         
 
-        d3.csv("/data/volume-data.csv").then(function (data) {
-                createVisualization(data);
-            });
-
-
-            // Write the createVisualization function
-            // This will contain the script that creates the chart
-            function createVisualization(data) {
-                // Width and height of SVG
-                
-                var w = 150;
-                var h = 175;
-
-                // Get length of dataset
-                var arrayLength = data.length; // length of dataset
-                var maxValue = d3.max(data, function (d) { return +d.Chile.split(",").join(""); }); // get maximum
-                // var maxValue = 497035
-
-                // debugger
-                var x_axisLength = 100; // length of x-axis in our layout
-                var y_axisLength = 100; // length of y-axis in our layout
-
-                // Use a scale for the height of the visualization
-                var yScale = d3.scaleLinear()
-                    .domain([0, maxValue])
-                    .range([0, y_axisLength]);
-
-                //Create SVG element
-                var svg = d3.select("body")
-                    .append("svg")
-                    .attr("width", w)
-                    .attr("height", h);
-
-                // Select and generate rectangle elements
         
-                // debugger
-                svg.selectAll("rect")
-                    .data(data)
-                    .enter()
-                    .append("rect")
-                    .attr("x", function (d, i) {
-                        return i * (x_axisLength / arrayLength) + 30; // Set x coordinate of rectangle to index of data value (i) *25
-                    })
-                    .attr("y", function (d) {
-                        debugger
-                        return h - yScale(d.Chile.split(",").join("")); // Set y coordinate of rect using the y scale
-                    })
-                    .attr("width", (x_axisLength / arrayLength) - 1)
-                    .attr("height", function (d) {
-                        return yScale(d.Chile.split(",").join("")); // Set height of using the scale
-                    })
-                    .attr("fill", "steelblue");
 
-                // Create y-axis
-                svg.append("line")
-                    .attr("x1", 30)
-                    .attr("y1", 75)
-                    .attr("x2", 30)
-                    .attr("y2", 175)
-                    .attr("stroke-width", 2)
-                    .attr("stroke", "black");
+    d3.csv("/data/volume-data.csv").then(function (data) {
+            createVisualization(data);
+        });
 
-                // Create x-axis
-                svg.append("line")
-                    .attr("x1", 30)
-                    .attr("y1", 175)
-                    .attr("x2", 130)
-                    .attr("y2", 175)
-                    .attr("stroke-width", 2)
-                    .attr("stroke", "black");
+        // Write the createVisualization function
+        // This will contain the script that creates the chart
+        function createVisualization(data) {
+            // Width and height of SVG
+            
+            var w = 300;
+            var h = 350;
 
-                // y-axis label
-                svg.append("text")
-                    .attr("class", "y label")
-                    .attr("text-anchor", "end")
-                    .text("Total Volume")
-                    .attr("transform", "translate(20, 20) rotate(-90)")
-                    .attr("font-size", "14")
-                    .attr("font-family", "'Open Sans', sans-serif");
-
-
-
-                    
-            };
             
 
-    </script>
+            // Get length of dataset
+            var arrayLength = data.length; // length of dataset
+            var maxValue = d3.max(data, function (d) { return +d.Chile.split(",").join(""); }); // get maximum
+            
+
+            
+            var x_axisLength = 200; // length of x-axis in our layout
+            var y_axisLength = 200; // length of y-axis in our layout
+
+            // Use a scale for the height of the visualization
+            var yScale = d3.scaleLinear()
+                .domain([0, maxValue])
+                .range([0, y_axisLength]);
+
+            //Create SVG element
+            var svg = d3.select("body")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h);
+
+            // Select and generate rectangle elements
+
+
+
+            var tooltip = d3.select("body")
+                .append("div")
+                .style("position", "absolute")
+                .style("font-family", "'Open Sans', sans-serif")
+                .style("font-size", "12px")
+                .style("z-index", "10")
+                .style("visibility", "hidden");
     
+            // debugger
+            svg.selectAll("rect")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("x", function (d, i) {
+                    return i * (x_axisLength / arrayLength) + 60; // Set x coordinate of rectangle to index of data value (i) *25
+                })
+                .attr("y", function (d) {
+                    debugger
+                    return h - yScale(d.Chile.split(",").join("")); // Set y coordinate of rect using the y scale
+                })
+                .attr("width", (x_axisLength / arrayLength) - 1)
+                .attr("height", function (d) {
+                    return yScale(d.Chile.split(",").join("")); // Set height of using the scale
+                })
+                .attr("fill", "steelblue")
+                .on("mouseover", function (d) {
+                    return tooltip.style("visibility", "visible").text(d.Week + ": " + d.Chile.split(",").join(""));
+                })
+                .on("mousemove", function (d) {
+                    return tooltip.style("top", (d3.event.pageY - 20) + "px").style("left", (d3.event.pageX + 20) + "px").text(d.Week + ": " + d.Chile.split(",").join(""));
+                })
+                .on("mouseout", function (d) {
+                    return tooltip.style("visibility", "hidden");
+                });
+
+            // Create y-axis
+            svg.append("line")
+                .attr("x1", 60)
+                .attr("y1", 150)
+                .attr("x2", 60)
+                .attr("y2", 350)
+                .attr("stroke-width", 4)
+                .attr("stroke", "black");
+
+            // Create x-axis
+            svg.append("line")
+                .attr("x1", 60)
+                .attr("y1", 350)
+                .attr("x2", 260)
+                .attr("y2", 350)
+                .attr("stroke-width", 4)
+                .attr("stroke", "black");
+
+            // y-axis label
+            svg.append("text")
+                .attr("class", "y label")
+                .attr("text-anchor", "end")
+                .text("Total Volume")
+                .attr("transform", "translate(40, 40) rotate(-90)")
+                .attr("font-size", "14")
+                .attr("font-family", "'Open Sans', sans-serif");
+
+
+                
+        };
+        
+
+
+        
+            </script>
 </body>
 </html>
