@@ -1,174 +1,62 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hello Avocado</title>
-    <link rel="icon" href="src/public/favicon.ico" />
-    <script src="./dist/main.js"></script>
-    <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
-</head> -->
-
 <!DOCTYPE html>
+
 <meta charset="utf-8">
+
 <head>
     <title>Hello Avocado</title>
     <link rel="icon" href="src/public/favicon.ico" />
-</head>
-<style>
-    /* set the CSS */
 
-    .line {
-        fill: none;
-        stroke: steelblue;
-        stroke-width: 2px;
-    }
-
-    .axisSteelBlue text {
-        fill: steelblue;
-    }
-
-    .axisRed text {
-        fill: red;
-    }
-
-    .legend {
-        font: 16px sans-serif;
-        font-weight: bold;
-        text-anchor: start;
-    }
-</style>
-<body>
-
-    
-
-    <!-- load the d3.js library -->
+    <link rel="stylesheet" href="./dist/main.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script>
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+    <!-- <script src="lib/import.js" charset="utf-8"></script> -->
+    <script src="lib/imports.js" charset="utf-8"></script>
+    <script src="lib/exports.js" charset="utf-8"></script>
+</head>
 
-        // set the dimensions and margins of the graph
-        var margin = { top: 20, right: 40, bottom: 60, left: 50 },
-            width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
 
-        // parse the date / time
-        var parseTime = d3.timeParse("%d-%b-%y");
+<body class="all">
+    <div class="header">
+        <div class="header-left">
+            <img src="assets/images/avocado-icon.png">
+            <p>Hello Avocado</p>
+        </div>
+        <div>
+            <a href="https://www.linkedin.com/in/jeanyang-engineer/"></a>
+        </div>
 
-        // set the ranges
-        var x = d3.scaleTime().range([0, width]);
-        var y0 = d3.scaleLinear().range([height, 0]);
-        var y1 = d3.scaleLinear().range([height, 0]);
-        var y2 = d3.scaleLinear().range([height, 0]);
+    </div>
+    
+    <div class="parallax">
 
-        // define the 1st line
-        var valueline = d3.line()
-            .x(function (d) { return x(d.date); })
-            .y(function (d) { return y0(d.close); });
+        <img class="background" src="assets/images/whitebackground.png" alt="">
+        <div class="info">
+            <div class="info-title">Bravocado!</div>
+            <div class="discription">Avocado is the new hot healthy superfood. You can see avocados everywhere - guacamole dips at your friend's party,
+            delicious salads at your parents' table, and of course avocado toast at the overpriced hipster coffee shop right around
+            the corner.</div>
+        </div>
+    </div>
+    
+    
+    <div class='content'>
+        
+        <!-- <form action=""></form> -->
 
-        // define the 2nd line
-        var valueline2 = d3.line()
-            .x(function (d) { return x(d.date); })
-            .y(function (d) { return y1(d.open); });
+        <div id='layout'>
+            
+            <div class='imports-exports' id='container'>
+                
+                    <svg id='imports'></svg>
+                
+                
+                    <svg id='exports'></svg>
+                
+            </div>
+        </div>
 
-        // define the 3rd line 
-        var valueline2 = d3.line()
-            .x(function (d) { return x(d.date); })
-            .y(function (d) { return y2(d.open); });
+        
 
-        // append the svg obgect to the body of the page
-        // appends a 'group' element to 'svg'
-        // moves the 'group' element to the top left margin
-        var svg = d3.select("body").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
 
-        // get the data
-        d3.csv("data4.csv", function (error, data) {
-            if (error) throw error;
-
-            // format the data
-            data.forEach(function (d) {
-                d.date = parseTime(d.date);
-                d.close = +d.close;
-                d.open = +d.open;
-            });
-
-            // scale the range of the data
-            x.domain(d3.extent(data, function (d) { return d.date; }));
-            y0.domain([0, d3.max(data, function (d) { return Math.max(d.close); })]);
-            y1.domain([0, d3.max(data, function (d) { return Math.max(d.open); })]);
-
-            // add the valueline path.
-            svg.append("path")
-                .data([data])
-                .attr("class", "line")
-                .attr("id", "blueLine")
-                .attr("d", valueline);
-
-            // add the valueline2 path.
-            svg.append("path")
-                .data([data])
-                .attr("class", "line")
-                .attr("id", "redLine")
-                .style("stroke", "red")
-                .attr("d", valueline2);
-
-            // add the X Axis
-            svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
-
-            // add the Y0 Axis
-            svg.append("g")
-                .attr("class", "axisSteelBlue")
-                .call(d3.axisLeft(y0));
-
-            // add the Y1 Axis
-            svg.append("g")
-                .attr("class", "axisRed")
-                .attr("transform", "translate( " + width + ", 0 )")
-                .call(d3.axisRight(y1));
-
-            // add the blue line legend
-            svg.append("text")
-                .attr("x", 0)
-                .attr("y", height + margin.top + 15)
-                .attr("class", "legend")
-                .style("fill", "steelblue")
-                .on("click", function () {
-                    // determine if current line is visible
-                    var active = blueLine.active ? false : true,
-                        newOpacity = active ? 0 : 1;
-                    // hide or show the elements
-                    d3.select("#blueLine").style("opacity", newOpacity);
-                    // update whether or not the elements are active
-                    blueLine.active = active;
-                })
-                .text("Blue Line");
-
-            // add the red line legend
-            svg.append("text")
-                .attr("x", 0)
-                .attr("y", height + margin.top + 35)
-                .attr("class", "legend")
-                .style("fill", "red")
-                .on("click", function () {
-                    // determine if current line is visible
-                    var active = redLine.active ? false : true,
-                        newOpacity = active ? 0 : 1;
-                    // hide or show the elements
-                    d3.select("#redLine").style("opacity", newOpacity);
-                    // update whether or not the elements are active
-                    redLine.active = active;
-                })
-                .text("Red Line");
-
-        });
-
-    </script>
+    </div>
 </body>
-</html>

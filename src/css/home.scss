@@ -1,0 +1,86 @@
+@import 'reset', 'bar-graph';
+.all {
+  font-family: 'Bree Serif', serif;
+}
+
+.header {
+  font-family: 'Bree Serif', serif;
+  font-weight: 700;
+
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  padding: 10px 3%;
+
+  img {
+    height: 35px;
+    align-self: center;
+  }
+
+  p {
+    font-size: 23px;
+    color: darkslategrey;
+    align-self: center;
+  }
+}
+
+
+
+.header-left {
+  display: grid;
+  grid-template-columns: 50px auto;
+
+}
+
+.parallax {
+  
+  display: grid;
+  grid-template-rows: 500px;
+  grid-template-columns: 1fr;
+}
+
+
+
+
+
+.background {
+  
+grid-column-start: 1;
+  grid-row-start: 1;
+  
+    object-fit: cover;
+    height: 100%; 
+    width: 100%;
+  
+}
+
+.info {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  display: grid;
+  
+  padding: 6%;
+  color: darkslategrey;
+  grid-template-rows: 1fr 1fr;
+}
+
+.info-title {
+      font-size: 110px;
+      align-self: center;
+      text-shadow: 10px 2px cornsilk;
+    
+}
+
+.discription {
+  font-size: 22px;
+    
+    line-height: 1.2em;
+    align-self: start;
+    text-shadow: 1px 1px cornsilk;
+    width: 80%;
+}
+
+.content {
+    
+    
+    
+}

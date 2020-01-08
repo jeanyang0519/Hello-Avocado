@@ -1,4 +1,4 @@
-import './styles/index.scss'
+import './css/home.scss'
 
 {/* <script> */}
 
