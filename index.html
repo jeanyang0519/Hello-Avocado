@@ -158,7 +158,16 @@
                         });
                         // X axis
                         x.domain(data.map(function (d) { return d.Week; }))
-                        xAxis.transition().duration(1000).call(d3.axisBottom(x))
+                        xAxis.transition()
+                            .duration(1000)
+                            .call(d3.axisBottom(x))
+                            .attr("transform", "translate(0," + height + ")")
+                            .call(d3.axisBottom(x))
+                            .selectAll("text")
+                            .attr("transform", "translate(-10,0)rotate(-45)")
+                            .style("text-anchor", "end");
+                            // .attr("transform", "rotate(-65)")
+
 
                         // Add Y axis
                         const maxY = d3.max(data, function (d) { 
@@ -175,9 +184,8 @@
                         // variable u: map data to existing circle
                         var j = svg.selectAll(".myLine")
                             .data(data)
-                            // .attr("transform", "rotate(-65)");
-                        // update lines
-                        j
+                            // update lines
+                            j
                             .enter()
                             .append("line")
                             .attr("class", "myLine")
@@ -185,16 +193,18 @@
                             .transition()
                             .duration(1000)
                             .attr("x1", function (d) { console.log(x(d.Week)); return x(d.Week); })
+                            
                             .attr("x2", function (d) { return x(d.Week); })
                             .attr("y1", y(0))
                             .attr("y2", function (d) { return y(d[selectedVar].split(',').join('')); })
                             .attr("stroke", "grey")
+                            
 
 
                         // variable u: map data to existing circle
-                        // update bars
                         var u = svg.selectAll("circle")
                             .data(data)
+                        // update bars
                         u
                             .enter()
                             .append("circle")
