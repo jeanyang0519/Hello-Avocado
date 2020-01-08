@@ -1,4 +1,4 @@
-@import 'reset', 'bar-graph';
+@import 'reset', 'bar-graph', 'lollipop';
 .all {
   font-family: 'Bree Serif', serif;
 }
@@ -73,6 +73,8 @@
   grid-template-rows: 1fr 1fr;
 }
 
+
+
 .info-title {
       font-size: 110px;
       align-self: center;
@@ -131,4 +133,8 @@
   img:hover {
     transform: scale(1.2);
   }
+}
+
+.lollipop {
+  height: 1000px;
 }

@@ -9,9 +9,15 @@
     <link rel="stylesheet" href="./dist/main.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
-    <!-- <script src="lib/import.js" charset="utf-8"></script> -->
+    
+    <!-- data files -->
     <script src="lib/imports.js" charset="utf-8"></script>
     <script src="lib/exports.js" charset="utf-8"></script>
+    <!-- <script src="lib/test-volume.js" charset="utf-8"></script> -->
+
+<!-- time d3-time-format -->
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
 </head>
 
 
@@ -42,14 +48,9 @@
         <!-- <form action=""></form> -->
 
         <div id='layout'>
-            
             <div class='imports-exports' id='container'>
-                
-                    <svg id='imports'></svg>
-                
-                
-                    <svg id='exports'></svg>
-                
+                <svg id='imports'></svg>
+                <svg id='exports'></svg>
             </div>
         </div>
 
@@ -60,6 +61,23 @@
 
     <div class="parallax-2">
 
+    </div>
+
+    <div class="lollipop">
+        <div class="lollipop-buttons">
+            <button onclick="update('California')">California</button>
+            <button onclick="update('Chile')">Chile</button>
+            <button onclick="update('Mexico')">Mexico</button>
+            <button onclick="update('Peru')">Peru</button>
+        </div>
+        
+        <!-- Create a div where the graph will take place -->
+        <div id="volume"></div>
+        <!-- <div id='#volume'></div> -->
+    </div>
+    <!-- Change the image later -->
+    <div class="parallax-2">
+    
     </div>
 
     <div class="author">
@@ -83,4 +101,131 @@
         </div>
         
     </div>
+
+<!-- Create another file!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+    <script>
+        // set the dimensions and margins of the graph
+            var margin = { top: 60, right: 60, bottom: 140, left: 120 },
+                    width = 1400 - margin.left - margin.right,
+                    height = 800 - margin.top - margin.bottom;
+
+
+                    
+
+                // append the svg object to the body of the page
+                var svg = d3.select("#volume")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform",
+                        "translate(" + margin.left + "," + margin.top + ")");
+
+                // Initialize the X axis
+                var x = d3.scaleBand()
+                    .range([0, width])
+                    .padding(1);
+                var xAxis = svg.append("g")
+                    .attr("transform", "translate(0," + height + ")")
+
+                // Initialize the Y axis
+                var y = d3.scaleLinear()
+                    .range([height, 0])
+                    // .padding(1);
+                var yAxis = svg.append("g")
+                    
+                    
+                    // A function that create / update the plot for a given variable:
+                    function update(selectedVar) {
+                        
+                        // Parse the Data
+                        d3.csv("test.csv", function (data) {
+                            // debugger
+                            // console.log(data)
+                        // parse date
+                        var parseDate = d3.timeParse("%b %d, %Y");
+                        const formaDate = d3.timeFormat('%b-%d')
+                        
+                        data.forEach(function (d) {
+                            d.Week = formaDate(parseDate(d.Week));
+                            
+                            // d[selectedVar] = d[selectedVar];
+                            // debugger
+                            
+                            // console.log(d[selectedVar])
+                            // console.log(d.Week)
+                        });
+                        // X axis
+                        x.domain(data.map(function (d) { return d.Week; }))
+                        xAxis.transition().duration(1000).call(d3.axisBottom(x))
+
+                        // Add Y axis
+                        const maxY = d3.max(data, function (d) { 
+                            // debugger
+                            return +d[selectedVar].split(',').join('')
+                        })
+                        
+                        
+                        y.domain([0, maxY]);
+                        yAxis.transition().duration(1000).call(d3.axisLeft(y));
+
+                       
+                        
+                        // variable u: map data to existing circle
+                        var j = svg.selectAll(".myLine")
+                            .data(data)
+                            // .attr("transform", "rotate(-65)");
+                        // update lines
+                        j
+                            .enter()
+                            .append("line")
+                            .attr("class", "myLine")
+                            .merge(j)
+                            .transition()
+                            .duration(1000)
+                            .attr("x1", function (d) { console.log(x(d.Week)); return x(d.Week); })
+                            .attr("x2", function (d) { return x(d.Week); })
+                            .attr("y1", y(0))
+                            .attr("y2", function (d) { return y(d[selectedVar].split(',').join('')); })
+                            .attr("stroke", "grey")
+
+
+                        // variable u: map data to existing circle
+                        // update bars
+                        var u = svg.selectAll("circle")
+                            .data(data)
+                        u
+                            .enter()
+                            .append("circle")
+                            .merge(u)
+                            .transition()
+                            .duration(1000)
+                            .attr("cx", function (d) { return x(d.Week); })
+                            .attr("cy", function (d) { return y(d[selectedVar].split(',').join('')); })
+                            .attr("r", 8)
+                            .attr("fill", "#69b3a2")
+
+                        // svg.append("g")
+                        //         .attr("transform", "translate(0," + height + ")")
+                        //         .call(d3.axisBottom(x))
+                        //         .selectAll("text")
+                        //         .attr("transform", "translate(-10,0)rotate(-45)")
+                        //         .style("text-anchor", "end");
+
+                        // svg.append('text')
+                        //         .attr('class', 'source')
+                        //         .attr('x', width - margin / 2)
+                        //         .attr('y', height + margin * 1.7)
+                        //         .attr('text-anchor', 'start')
+                        //         .text('Source: Hass Avocado Board, 2019')
+
+
+                    })
+
+                }
+
+                // Initialize plot
+                update('California')
+    </script>
 </body>

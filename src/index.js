@@ -11,17 +11,17 @@ import './css/home.scss'
 
 // Write the createVisualization function
 // This will contain the script that creates the chart
-        function createVisualization(data) {
+    function createVisualization(data) {
             // Width and height of SVG
 
-            var w = 150;
+    var w = 150;
     var h = 175;
 
 
 
     // Get length of dataset
     var arrayLength = data.length; // length of dataset
-            var maxValue = d3.max(data, function (d) { return +d.Chile.split(",").join(""); }); // get maximum
+    var maxValue = d3.max(data, function (d) { return +d.Chile.split(",").join(""); }); // get maximum
     // var maxValue = 497035
 
     // debugger
@@ -34,7 +34,7 @@ import './css/home.scss'
         .range([0, y_axisLength]);
 
     //Create SVG element
-    var svg = d3.select("body")
+    var svg = d3.select("#volume")
         .append("svg")
         .attr("width", w)
         .attr("height", h);
