@@ -9,15 +9,15 @@
 
   display: grid;
   grid-template-columns: repeat(2, auto);
-  padding: 10px 3%;
+  padding: 2% 3%;
 
   img {
-    height: 35px;
+    height: 40px;
     align-self: center;
   }
 
   p {
-    font-size: 23px;
+    font-size: 30px;
     color: darkslategrey;
     align-self: center;
   }
@@ -27,37 +27,51 @@
 
 .header-left {
   display: grid;
-  grid-template-columns: 50px auto;
+  grid-template-columns: 56px auto;
 
 }
 
-.parallax {
-  
-  display: grid;
-  grid-template-rows: 500px;
-  grid-template-columns: 1fr;
+
+
+.parallax-1 {
+  /* The image used */
+  background-image: url("/assets/images/whitebackground.png");
+
+  /* Set a specific height */
+  min-height: 493px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallax-2 {
+  /* The image used */
+  background-image: url("/assets/images/toasts.jpg");
+
+  /* Set a specific height */
+  min-height: 600px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
 
 
 
-.background {
-  
-grid-column-start: 1;
-  grid-row-start: 1;
-  
-    object-fit: cover;
-    height: 100%; 
-    width: 100%;
-  
-}
+
 
 .info {
   grid-column-start: 1;
   grid-row-start: 1;
   display: grid;
-  
+  grid-gap: 10px;
   padding: 6%;
   color: darkslategrey;
   grid-template-rows: 1fr 1fr;
@@ -66,21 +80,56 @@ grid-column-start: 1;
 .info-title {
       font-size: 110px;
       align-self: center;
-      text-shadow: 10px 2px cornsilk;
+      text-shadow: 10px 0px lightsalmon;
     
 }
 
 .discription {
-  font-size: 22px;
-    
-    line-height: 1.2em;
-    align-self: start;
+         font-size: 20px;
+    line-height: 1.3em;
+    align-self: end;
     text-shadow: 1px 1px cornsilk;
-    width: 80%;
+    width: 50%;
 }
 
 .content {
+    height: 1400px;
     
     
-    
+}
+
+.author {
+  height: 450px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    color: gray;
+    padding: 0 13%;
+    grid-gap: 9%;
+
+  span {
+    font-size: 35px;
+    color: darkslategrey;
+    text-shadow: 2px 3px lightsalmon;
+  }
+  img {
+    height: 230px;
+    align-self: center;
+  }
+}
+
+.author-info {
+  display: grid;
+    align-self: center;
+    grid-gap: 30px;
+}
+
+.icons {
+    justify-self: start;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 23px;
+
+  img {
+    height: 35px;
+  }
 }

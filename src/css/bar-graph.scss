@@ -3,12 +3,14 @@ body {
 
 }
 
-// .imports-exports {
-//     display: grid;
-//     grid-template-columns: repeat(2, auto);
+.imports-exports {
+    display: grid;
+    padding: 3% 0;
+  
+    grid-template-rows: 700px 700px;
 
 
-// }
+}
 
 div#layout {
   text-align: center;
