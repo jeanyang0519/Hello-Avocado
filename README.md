@@ -12,9 +12,9 @@ Hellow Avocado is an interactive data visualization on avocado global trade and 
 ## Code Hightlights
 ### Update Function
 
-    I created the `update` function to show the different datasets by clicking on buttons. To make the click action work, I set unique `id`s and `data-variable`s for each button in `index.html` and use `getElementById` in `lib/volume.js`. When users click on buttons, transitions will be implemented. 
+I created the `update` function to show the different datasets by clicking on buttons. To make the click action work, I set unique `id`s and `data-variable`s for each button in `index.html` and use `getElementById` in `lib/volume.js`. When users click on buttons, transitions will be implemented. 
 
-<img src="https://media.giphy.com/media/QWkGWsRg6Q16RBdUlb/giphy.gif" width="600" />
+<img src="https://media.giphy.com/media/gLVyBWciO1Ud7tm7dN/giphy.gif" width="600" />
 
 ```JavaScript 
 // index.html
