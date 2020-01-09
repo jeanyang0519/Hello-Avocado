@@ -10,11 +10,11 @@ Hellow Avocado is an interactive data visualization on avocado global trade and 
 * HTML
 
 ## Code Hightlights
-#### Update Function
+### Update Function
 
     I created the `update` function to show the different datasets by clicking on buttons. To make the click action work, I set unique `id`s and `data-variable`s for each button in `index.html` and use `getElementById` in `lib/volume.js`. When users click on buttons, transitions will be implemented. 
 
-    <img src="https://media.giphy.com/media/QWkGWsRg6Q16RBdUlb/giphy.gif" width="600" />
+<img src="https://media.giphy.com/media/QWkGWsRg6Q16RBdUlb/giphy.gif" width="600" />
 
 ```JavaScript 
 // index.html
@@ -98,7 +98,7 @@ function update(selectedVar) {
     }
 ```
 
-#### Hover Effect
+### Hover Effect
 
   I implemented the hover effect to show the data for individual data entry by creating `handleMouseOver` and `handleMouseOut` functions. When users hover over the circle at the lollipop chart, the circle will show the data, increase the size of the circle, and change the color. I also attached a class in the `handleMouseOver`, so `handleMouseOut` can identify the class and remove the effect created by `handleMouseOver`. 
 
@@ -132,7 +132,7 @@ function handleMouseOut(d, i) {
 }
 ```
 
-#### Time Format
+### Time Format
 
   I created two variables - `parseDate` and `formatDate` - to read the data from the `csv` file. `parseDate` reads the information from the data file (e.g. "Jan 6, 2019"). `formatDate` transforms the date to only show month and date (e.g. "Jan 6"). Finally, I  iterated through the data and parse the date.
 
