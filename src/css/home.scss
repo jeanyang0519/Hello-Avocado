@@ -34,13 +34,8 @@
 
 
 .parallax-1 {
-  /* The image used */
   background-image: url("/assets/images/whitebackground.png");
-
-  /* Set a specific height */
   min-height: 493px; 
-
-  /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
