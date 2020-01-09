@@ -14,7 +14,7 @@ Hellow Avocado is an interactive data visualization on avocado global trade and 
 
 I created the `update` function to show the different datasets by clicking on buttons. To make the click action work, I set unique `id`s and `data-variable`s for each button in `index.html` and use `getElementById` in `lib/volume.js`. When users click on buttons, transitions will be implemented. 
 
-<img src="https://media.giphy.com/media/gLVyBWciO1Ud7tm7dN/giphy.gif" width="600" />
+<img src="https://media.giphy.com/media/jnJngdh9Bi4e7Ruc6n/giphy.gif" width="600" />
 
 ```JavaScript 
 // index.html
