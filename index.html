@@ -13,7 +13,7 @@
     <!-- data files -->
     <script src="lib/imports.js" charset="utf-8"></script>
     <script src="lib/exports.js" charset="utf-8"></script>
-    <!-- <script src="lib/volume.js" charset="utf-8"></script> -->
+    <script src="lib/volume.js" charset="utf-8"></script>
     
 
 <!-- time d3-time-format -->
@@ -36,7 +36,7 @@
             <div class="discription">Avocado is the new hot healthy superfood. You can see avocados everywhere - guacamole dips at your friend's party,
             delicious salads at your parents' table, and of course avocado toast at the overpriced hipster coffee shop right around the corner.
             <br/>
-            Here are some interactive data on avocado global trade and production. Have fun and get to know
+            Here is some interactive data on avocado global trade and production. Have fun and get to know
             more about avocados!
             </div>
             <!-- <div class="discription">Here are some interactive data on avocado global trade and production. Have fun and get to know
@@ -58,7 +58,7 @@
         <div class="facts">
         <span>Fun Facts</span>
         <div class="points">
-            <li>Avocados are fruits</li>
+            <li>Avocados are fruits, not vegetables</li>
             <li>Avocados contain more fat than any other fruit</li>
             <li>Avocados mature on the tree and only ripen after harvesting</li>
         </div>
@@ -74,12 +74,15 @@
         </div>
 
         <div class="lollipop-buttons">
-            <!-- <button id='clickme'>California</button>
-            <button id='clickme-2'>Chile</button> -->
-            <button onclick="update('California')">California</button>
-            <button onclick="update('Chile')">Chile</button>
-            <button onclick="update('Mexico')">Mexico</button>
-            <button onclick="update('Peru')">Peru</button>
+            <button id='clickme-0' data-total="Total">Total</button>
+            <button id='clickme-1' data-california="California">California</button>
+            <button id='clickme-2' data-chile="Chile">Chile</button>
+            <button id='clickme-3' data-mexico="Mexico">Mexico</button>
+            <button id='clickme-4' data-peru="Peru">Peru</button>
+            <!-- <button onclick="update('California')">California</button>
+            <button onclick="update('Chile')">Chile</button> -->
+            <!-- <button onclick="update('Mexico')">Mexico</button>
+            <button onclick="update('Peru')">Peru</button> -->
         </div>
     </div>
     <!-- Change the image later -->
@@ -92,7 +95,7 @@
             <span>Jean Yang</span>
             <p>Software Engineer, proficient with React, Redux, and JavaScript.
                 <br>
-                Love hiking, traveling and squash. Based in New York City.</p>
+                Loves hiking, traveling, and squash. Based in New York City.</p>
             <div class="icons">
                 <a href="https://www.linkedin.com/in/jeanyang-engineer/">
                     <img src="assets/images/linkedin.png" alt="">
@@ -114,149 +117,149 @@
 
        
         
-            const margin = { top: 60, right: 60, bottom: 140, left: 120 },
-                width = 1400 - margin.left - margin.right,
-                height = 700 - margin.top - margin.bottom;
+            // const margin = { top: 60, right: 60, bottom: 140, left: 120 },
+            //     width = 1400 - margin.left - margin.right,
+            //     height = 700 - margin.top - margin.bottom;
 
 
-                const svg = d3.select("#volume")
-                    .append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
-                    .append("g")
-                    .attr("transform","translate(" + margin.left  + "," + margin.top + ")");
-
-                
-                const x = d3.scaleBand()
-                            .range([0, width])
-                            .padding(1);
-
-                const xAxis = svg.append("g")
-                                 .attr("transform", "translate(0," + height + ")")
+            //     const svg = d3.select("#volume")
+            //         .append("svg")
+            //         .attr("width", width + margin.left + margin.right)
+            //         .attr("height", height + margin.top + margin.bottom)
+            //         .append("g")
+            //         .attr("transform","translate(" + margin.left  + "," + margin.top + ")");
 
                 
-                const y = d3.scaleLinear()
-                            .range([height, 0])
+            //     const x = d3.scaleBand()
+            //                 .range([0, width])
+            //                 .padding(1);
+
+            //     const xAxis = svg.append("g")
+            //                      .attr("transform", "translate(0," + height + ")")
+
+                
+            //     const y = d3.scaleLinear()
+            //                 .range([height, 0])
                     
-                const yAxis = svg.append("g")
+            //     const yAxis = svg.append("g")
                     
                     
                     
-                function update(selectedVar) {
+            //     function update(selectedVar) {
                     
                     
-                    d3.csv("test.csv", function (data) {
+            //         d3.csv("test.csv", function (data) {
                     
-                    const parseDate = d3.timeParse("%b %d, %Y");
-                    const formaDate = d3.timeFormat('%b-%d')
+            //         const parseDate = d3.timeParse("%b %d, %Y");
+            //         const formaDate = d3.timeFormat('%b-%d')
                     
-                    data.forEach(function (d) {
-                        d.Week = formaDate(parseDate(d.Week));
+            //         data.forEach(function (d) {
+            //             d.Week = formaDate(parseDate(d.Week));
                         
                         
-                    });
+            //         });
                     
-                    x.domain(data.map(function (d) { return d.Week; }) )
-                    xAxis.transition()
-                        .duration(1000)
-                        .call(d3.axisBottom(x))
-                        .attr("transform", "translate(-0.2," + height + ")")
+            //         x.domain(data.map(function (d) { return d.Week; }) )
+            //         xAxis.transition()
+            //             .duration(1000)
+            //             .call(d3.axisBottom(x))
+            //             .attr("transform", "translate(-0.2," + height + ")")
                         
-                        .selectAll("text")
-                        .attr("transform", "translate(-10,0)rotate(-45)")
-                        .style("text-anchor", "end")
-                        .attr('x', -8)
+            //             .selectAll("text")
+            //             .attr("transform", "translate(-10,0)rotate(-45)")
+            //             .style("text-anchor", "end")
+            //             .attr('x', -8)
                         
                         
-                    const maxY = d3.max(data, function (d) { 
-                        return +d[selectedVar].split(',').join('')
-                    })
+            //         const maxY = d3.max(data, function (d) { 
+            //             return +d[selectedVar].split(',').join('')
+            //         })
                     
                     
-                    y.domain([0, maxY]);
-                    yAxis.transition().duration(1000).call(d3.axisLeft(y));
+            //         y.domain([0, maxY]);
+            //         yAxis.transition().duration(1000).call(d3.axisLeft(y));
 
                     
                     
                     
-                    const line = svg.selectAll(".myLine")
-                        .data(data)
+            //         const line = svg.selectAll(".myLine")
+            //             .data(data)
                         
                         
-                        line.enter()
-                        .append("line")
-                        .attr("class", "myLine")
-                        .merge(line)
-                        .transition()
-                        .duration(1000)
-                        .attr("x1", function (d) { return x(d.Week); })
-                        .attr("x2", function (d) { return x(d.Week); })
-                        .attr("y1", y(0))
-                        .attr("y2", function (d) { return y(d[selectedVar].split(',').join('')); })
-                        .attr('opacity', 0.5)
-                        .attr("color", "red")
+            //             line.enter()
+            //             .append("line")
+            //             .attr("class", "myLine")
+            //             .merge(line)
+            //             .transition()
+            //             .duration(1000)
+            //             .attr("x1", function (d) { return x(d.Week); })
+            //             .attr("x2", function (d) { return x(d.Week); })
+            //             .attr("y1", y(0))
+            //             .attr("y2", function (d) { return y(d[selectedVar].split(',').join('')); })
+            //             .attr('opacity', 0.5)
+            //             .attr("color", "red")
 
                         
 
 
                     
-                    const circle = svg.selectAll("circle")
-                        .data(data)
+            //         const circle = svg.selectAll("circle")
+            //             .data(data)
 
-                        circle.enter()
-                        .append("circle")
-                        .merge(circle)
-                        .transition()
-                        .duration(1000)
-                        .attr("cx", function (d) { return x(d.Week) })
-                        .attr("cy", function (d) { return y(d[selectedVar].split(',').join('')) })
-                        .attr("r", 6)
-                        .attr("fill", "darksalmon")
+            //             circle.enter()
+            //             .append("circle")
+            //             .merge(circle)
+            //             .transition()
+            //             .duration(1000)
+            //             .attr("cx", function (d) { return x(d.Week) })
+            //             .attr("cy", function (d) { return y(d[selectedVar].split(',').join('')) })
+            //             .attr("r", 6)
+            //             .attr("fill", "darksalmon")
 
 
-                    svg.selectAll("circle")
-                        .on("mouseover", handleMouseOver)
-                        .on("mouseout", handleMouseOut)
+            //         svg.selectAll("circle")
+            //             .on("mouseover", handleMouseOver)
+            //             .on("mouseout", handleMouseOut)
                         
-                    function handleMouseOver(d, i) {
-                        svg.append('text')
-                        .attr('class', 'hoverVaule')
-                        .attr("x", x(d.Week) - 20)
-                        .attr('y', y(d[selectedVar].split(',').join('')) - 18)
-                        .text(d[selectedVar])
-                        .attr('font-size', 200)
+            //         function handleMouseOver(d, i) {
+            //             svg.append('text')
+            //             .attr('class', 'hoverVaule')
+            //             .attr("x", x(d.Week) - 20)
+            //             .attr('y', y(d[selectedVar].split(',').join('')) - 18)
+            //             .text(d[selectedVar])
+            //             .attr('font-size', 200)
                         
                         
 
-                        d3.select(this)
-                        .attr('fill', "darkcyan")
-                        .attr('r', 10)
+            //             d3.select(this)
+            //             .attr('fill', "darkcyan")
+            //             .attr('r', 10)
                         
-                    }
+            //         }
 
-                    function handleMouseOut(d, i) {
-                        d3.select('.hoverVaule').remove();
-                        d3.select(this)
-                            .attr('fill', "darksalmon")
-                            .attr('r', 6)
+            //         function handleMouseOut(d, i) {
+            //             d3.select('.hoverVaule').remove();
+            //             d3.select(this)
+            //                 .attr('fill', "darksalmon")
+            //                 .attr('r', 6)
                             
-                    }
+            //         }
 
                 
-                    svg.append('text')
-                            .attr('class', 'source')
-                            .attr('x', width - 150)
-                            .attr('y', height + 100)
-                            .attr('text-anchor', 'start')
-                            .text('Source: Hass Avocado Board, 2019')
+            //         svg.append('text')
+            //                 .attr('class', 'source')
+            //                 .attr('x', width - 150)
+            //                 .attr('y', height + 100)
+            //                 .attr('text-anchor', 'start')
+            //                 .text('Source: Hass Avocado Board, 2019')
 
 
-                })
+            //     })
 
-            }
+            // }
 
                 
-            update('California')
+            // update('California')
 
                
     </script>
