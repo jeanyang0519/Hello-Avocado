@@ -1,4 +1,4 @@
-# Hellow Avocado
+# Hello Avocado
 Avocado is the new hot healthy superfood. You can see avocados everywhere - guacamole dips at your friend's party, delicious salads at your parents' table, and of course avocado toast at the overpriced hipster coffee shop right around the corner. 
 
 Hellow Avocado is an interactive data visualization on avocado global trade and production. Have fun and get to know more about avocados!
@@ -13,6 +13,8 @@ Hellow Avocado is an interactive data visualization on avocado global trade and 
 * Update Function
 
     I created the `update` function to show the different datasets by clicking on buttons. To make the click action work, I set unique `id`s and `data-variable`s for each button in `index.html` and use `getElementById` in `lib/volume.js`. When users click on buttons, transitions will be implemented. 
+
+    <img src="https://media.giphy.com/media/QWkGWsRg6Q16RBdUlb/giphy.gif" width="600" />
 
 ```JavaScript 
 // index.html
@@ -145,4 +147,3 @@ function handleMouseOut(d, i) {
 
 
 
-<img src="https://media.giphy.com/media/l0cJEAXlQnInal7SrJ/giphy.gif" width="600" />
