@@ -102,7 +102,7 @@ function update(selectedVar) {
 
   I implemented the hover effect to show the data for individual data entry by creating `handleMouseOver` and `handleMouseOut` functions. When users hover over the circle at the lollipop chart, the circle will show the data, increase the size of the circle, and change the color. I also attached a class in the `handleMouseOver`, so `handleMouseOut` can identify the class and remove the effect created by `handleMouseOver`. 
 
-  <img src='https://media.giphy.com/media/YrTj7QCZSxyUHFy5WF/giphy.gif' width='600'/>
+  <img src='https://media.giphy.com/media/RNWqL7UkATAZ62C91n/giphy.gif' width='600'/>
 
 ```JavaScript
 // lib/volume.js
