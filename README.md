@@ -3,6 +3,8 @@ Avocado is the new hot healthy superfood. You can see avocados everywhere - guac
 
 Hellow Avocado is an interactive data visualization on avocado global trade and production. Have fun and get to know more about avocados!
 
+<img src='src/public/avocado.gif' width='600'/>
+
 ## Technologies 
 * D3.js
 * JavaScript
