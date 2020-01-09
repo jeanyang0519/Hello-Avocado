@@ -1,11 +1,63 @@
+.volume-wrapper {
+    display: grid;
+    
+}
+
+#volume {
+    justify-self: center;
+}
+
 .lollipop-buttons {
     display: grid;
     grid-template-columns: repeat(4, auto);
+    justify-self: center;
+    z-index: 1;
+    align-self: start;
+    grid-gap: 30px;
 }
 
 .lollipop {
+    height: 1000px;
+    display: grid;
+    grid-template-rows: 100px 680px 100px;
+
     button {
-        // outline: none;
-        padding: 40px;
+        color: darkcyan;
+        padding: 10px 17px;
+        font-family: 'Bree Serif', serif;
+        font-size: 15px;
+        border: 2px solid darkcyan;
+        border-radius: 12px;
+        cursor: pointer;
+        
+    }
+    
+    button:hover {
+        color: white;
+        border: 2px solid darksalmon;
+        background-color: darksalmon;
+    }
+
+    button:focus {
+        outline:0
+    }
+
+
+    span {
+        color: darkslategrey;
+        font-size: 22px;
+        justify-self: center;
+        align-self: end;
     }
 }
+
+text {
+    font-family: 'Bree Serif', serif;
+    color: darkslategray;
+    // font-weight: 700;
+}
+
+// .myLine {
+//     color: crimson;
+//     background-color: cyan;
+// }

@@ -13,7 +13,8 @@
     <!-- data files -->
     <script src="lib/imports.js" charset="utf-8"></script>
     <script src="lib/exports.js" charset="utf-8"></script>
-    <!-- <script src="lib/test-volume.js" charset="utf-8"></script> -->
+    <!-- <script src="lib/volume.js" charset="utf-8"></script> -->
+    
 
 <!-- time d3-time-format -->
     <script src="https://d3js.org/d3-time.v1.min.js"></script>
@@ -37,8 +38,7 @@
         <div class="info">
             <div class="info-title">Bravocado!</div>
             <div class="discription">Avocado is the new hot healthy superfood. You can see avocados everywhere - guacamole dips at your friend's party,
-            delicious salads at your parents' table, and of course avocado toast at the overpriced hipster coffee shop right around
-            the corner.</div>
+            delicious salads at your parents' table, and of course avocado toast at the overpriced hipster coffee shop.</div>
         </div>
     </div>
     
@@ -64,16 +64,21 @@
     </div>
 
     <div class="lollipop">
+        <span>Global Avocado Production</span>
+
+        <div class="volume-wrapper">
+            <div id="volume"></div>
+        </div>
+
         <div class="lollipop-buttons">
             <button onclick="update('California')">California</button>
             <button onclick="update('Chile')">Chile</button>
             <button onclick="update('Mexico')">Mexico</button>
-            <button onclick="update('Peru')">Peru</button>
+            <button id='peru-button'>Peru</button>
+            
         </div>
         
-        <!-- Create a div where the graph will take place -->
-        <div id="volume"></div>
-        <!-- <div id='#volume'></div> -->
+        
     </div>
     <!-- Change the image later -->
     <div class="parallax-2">
@@ -108,7 +113,7 @@
         // set the dimensions and margins of the graph
             var margin = { top: 60, right: 60, bottom: 140, left: 120 },
                     width = 1400 - margin.left - margin.right,
-                    height = 800 - margin.top - margin.bottom;
+                    height = 700 - margin.top - margin.bottom;
 
 
                     
@@ -120,7 +125,7 @@
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                     .attr("transform",
-                        "translate(" + margin.left + "," + margin.top + ")");
+                        "translate(" + margin.left  + "," + margin.top + ")");
 
                 // Initialize the X axis
                 var x = d3.scaleBand()
@@ -132,46 +137,38 @@
                 // Initialize the Y axis
                 var y = d3.scaleLinear()
                     .range([height, 0])
-                    // .padding(1);
+                    
                 var yAxis = svg.append("g")
                     
                     
-                    // A function that create / update the plot for a given variable:
+                    
                     function update(selectedVar) {
                         
-                        // Parse the Data
+                       
                         d3.csv("test.csv", function (data) {
-                            // debugger
-                            // console.log(data)
-                        // parse date
+                       
                         var parseDate = d3.timeParse("%b %d, %Y");
                         const formaDate = d3.timeFormat('%b-%d')
                         
                         data.forEach(function (d) {
                             d.Week = formaDate(parseDate(d.Week));
                             
-                            // d[selectedVar] = d[selectedVar];
-                            // debugger
                             
-                            // console.log(d[selectedVar])
-                            // console.log(d.Week)
                         });
-                        // X axis
-                        x.domain(data.map(function (d) { return d.Week; }))
+                        
+                        x.domain(data.map(function (d) { return d.Week; }) )
                         xAxis.transition()
                             .duration(1000)
                             .call(d3.axisBottom(x))
-                            .attr("transform", "translate(0," + height + ")")
-                            .call(d3.axisBottom(x))
+                            .attr("transform", "translate(-0.2," + height + ")")
+                            
                             .selectAll("text")
                             .attr("transform", "translate(-10,0)rotate(-45)")
-                            .style("text-anchor", "end");
-                            // .attr("transform", "rotate(-65)")
-
-
-                        // Add Y axis
+                            .style("text-anchor", "end")
+                            .attr('x', -8)
+                            
+                           
                         const maxY = d3.max(data, function (d) { 
-                            // debugger
                             return +d[selectedVar].split(',').join('')
                         })
                         
@@ -185,8 +182,8 @@
                         var j = svg.selectAll(".myLine")
                             .data(data)
                             // update lines
-                            j
-                            .enter()
+                            
+                            j.enter()
                             .append("line")
                             .attr("class", "myLine")
                             .merge(j)
@@ -197,24 +194,56 @@
                             .attr("x2", function (d) { return x(d.Week); })
                             .attr("y1", y(0))
                             .attr("y2", function (d) { return y(d[selectedVar].split(',').join('')); })
-                            .attr("stroke", "grey")
+                            .attr('opacity', 0.5)
+                            .attr("color", "red")
+
                             
 
 
-                        // variable u: map data to existing circle
+                        
                         var u = svg.selectAll("circle")
                             .data(data)
-                        // update bars
-                        u
-                            .enter()
+                            u.enter()
                             .append("circle")
                             .merge(u)
                             .transition()
                             .duration(1000)
-                            .attr("cx", function (d) { return x(d.Week); })
-                            .attr("cy", function (d) { return y(d[selectedVar].split(',').join('')); })
-                            .attr("r", 8)
-                            .attr("fill", "#69b3a2")
+                            .attr("cx", function (d) { return x(d.Week) })
+                            .attr("cy", function (d) { return y(d[selectedVar].split(',').join('')) })
+                            .attr("r", 5)
+                            .attr("fill", "darksalmon")
+
+
+                        svg.selectAll("circle")
+                            .on("mouseover", handleMouseOver)
+                            .on("mouseout", handleMouseOut)
+                            
+                            function handleMouseOver(d, i) {
+                                svg.append('text')
+                                .attr('class', 'hoverVaule')
+                                .attr("x", x(d.Week) - 20)
+                                .attr('y', y(d[selectedVar].split(',').join('')) - 18)
+                                .text(d[selectedVar])
+                               
+
+                                d3.select(this)
+                                .attr('fill', "darkcyan")
+                                .attr('r', 8)
+                                
+                                
+                            }
+
+                        function handleMouseOut(d, i) {
+                            d3.select('.hoverVaule').remove();
+                            d3.select(this)
+                                .attr('fill', "darksalmon")
+                                .attr('r', 5)
+                        }
+
+
+                         
+
+                            
 
                         // svg.append("g")
                         //         .attr("transform", "translate(0," + height + ")")
@@ -222,13 +251,14 @@
                         //         .selectAll("text")
                         //         .attr("transform", "translate(-10,0)rotate(-45)")
                         //         .style("text-anchor", "end");
+                      
 
-                        // svg.append('text')
-                        //         .attr('class', 'source')
-                        //         .attr('x', width - margin / 2)
-                        //         .attr('y', height + margin * 1.7)
-                        //         .attr('text-anchor', 'start')
-                        //         .text('Source: Hass Avocado Board, 2019')
+                        svg.append('text')
+                                .attr('class', 'source')
+                                .attr('x', width - 150)
+                                .attr('y', height + 100)
+                                .attr('text-anchor', 'start')
+                                .text('Source: Hass Avocado Board, 2019')
 
 
                     })
@@ -237,5 +267,8 @@
 
                 // Initialize plot
                 update('California')
+
+                const button = document.getElementById('peru-button')
+                button.addEventListener('click', () => update('Peru'))
     </script>
 </body>
