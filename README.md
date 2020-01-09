@@ -26,3 +26,5 @@ This app will consist of a single screen with the main data display, control but
     * Show the data by time
 * Day3
     * Style all the way
+
+    <img width="250px" src="https://giphy.com/gifs/l0cJEAXlQnInal7SrJ/html5" >
