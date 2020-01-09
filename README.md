@@ -28,4 +28,4 @@ This app will consist of a single screen with the main data display, control but
     * Style all the way
 
 
-<img src="https://media.giphy.com/media/l0cJEAXlQnInal7SrJ/200w_d.gif" width="400" />
+<img src="https://media.giphy.com/media/l0cJEAXlQnInal7SrJ/giphy.gif" width="400" />
