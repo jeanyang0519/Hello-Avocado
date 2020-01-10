@@ -1,7 +1,10 @@
 # Hello Avocado
+<p align="center">
+  <img width="250px" src="src/public/logo.png" >
+</p>
 Avocado is the new hot healthy superfood. You can see avocados everywhere - guacamole dips at your friend's party, delicious salads at your parents' table, and of course avocado toast at the overpriced hipster coffee shop right around the corner. 
 
-Hellow Avocado is an interactive data visualization on avocado global trade and production. Have fun and get to know more about avocados!
+Hello Avocado is an interactive data visualization on avocado global trade and production. Have fun and get to know more about avocados!
 
 <img src='src/public/avocado.gif' width='600'/>
 
