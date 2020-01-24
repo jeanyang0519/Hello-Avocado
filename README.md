@@ -3,7 +3,7 @@
 </p>
 
 ## Background and Overview
-<a href="https://lifegram.herokuapp.com/#/">Live Demo</a>
+<a href="https://jeanyang0519.github.io/Hello-Avocado/">Live Demo</a>
 
 Avocado is the new hot healthy superfood. You can see avocados everywhere - guacamole dips at your friend's party, delicious salads at your parents' table, and of course avocado toast at the overpriced hipster coffee shop right around the corner. 
 
