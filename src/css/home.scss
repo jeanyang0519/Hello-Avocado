@@ -3,6 +3,7 @@
   font-family: 'Bree Serif', serif;
 }
 
+
 .header {
   font-family: 'Bree Serif', serif;
   font-weight: 700;
@@ -117,17 +118,16 @@
     grid-gap: 9%;
     background-color: cornsilk;
 
-  span {
-    font-size: 35px;
-    color: darkslategrey;
-    text-shadow: 4px 3px lightsalmon;
-    letter-spacing: 2px;
-  }
   img {
     height: 230px;
     align-self: center;
   }
 }
+
+.author-name {
+  text-decoration: none;  
+}
+
 
 .author-info {
   display: grid;
@@ -139,7 +139,21 @@
       width: 500px;
       
     }
-    span:hover {
+
+    span {
+      font-size: 35px;
+      color: darkslategrey;
+      text-shadow: 4px 3px lightsalmon;
+      letter-spacing: 2px;
+      cursor: pointer;
+    
+    }
+
+    a {
+      text-decoration: none;
+    }
+    
+    a:hover {
       font-size: 50px;
     }
 }
