@@ -9,7 +9,7 @@ Avocado is the hot healthy superfood. You can see avocados everywhere - guacamol
 
 Hello Avocado is an interactive data visualization on avocado global trade and production. Have fun and get to know more about avocados!
 
-<img src='src/public/avocado.gif' width='100%'/>
+<!-- <img src='src/public/avocado.gif' width='100%'/> -->
 
 ## Technologies 
 * D3.js
@@ -22,7 +22,7 @@ Hello Avocado is an interactive data visualization on avocado global trade and p
 
 I created the `update` function to show the different datasets by clicking on buttons. To make the click action work, I set unique `id`s and `data-variable`s for each button in `index.html` and use `getElementById` in `lib/volume.js`. When users click on buttons, transitions will be implemented. 
 
-<img src='src/public/button.gif' width='100%'/>
+<!-- <img src='src/public/button.gif' width='100%'/> -->
 
 ```JavaScript 
 // index.html
@@ -154,6 +154,3 @@ data.forEach(function (d) {
     d.Week = formaDate(parseDate(d.Week));
 });
 ```
-
-
-
